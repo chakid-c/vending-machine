@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import { apiUrl } from "../helper";
 type Product = {
   id: number;
   name: string;
@@ -14,8 +14,8 @@ export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [form, setForm] = useState<Omit<Product, "id">>({
     name: "",
-    price: "", 
-    stock: "", 
+    price: "",
+    stock: "",
     image: "",
   });
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -25,7 +25,7 @@ export default function ProductPage() {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await fetch("http://localhost:8000/api/products");
+    const res = await fetch(`${apiUrl}/api/products`);
     const data = await res.json();
     setProducts(data);
   };
@@ -33,8 +33,8 @@ export default function ProductPage() {
   const handleSubmit = async () => {
     const method = editingId ? "PUT" : "POST";
     const url = editingId
-      ? `http://localhost:8000/api/products/${editingId}`
-      : "http://localhost:8000/api/products";
+      ? `${apiUrl}/api/products/${editingId}`
+      : `${apiUrl}/api/products`;
 
     await fetch(url, {
       method,
@@ -48,7 +48,7 @@ export default function ProductPage() {
   };
 
   const handleDelete = async (id: number) => {
-    await fetch(`http://localhost:8000/api/products/${id}`, {
+    await fetch(`${apiUrl}/api/products/${id}`, {
       method: "DELETE",
     });
     fetchProducts();

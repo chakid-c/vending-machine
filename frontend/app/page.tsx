@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { apiUrl } from "../app/helper";
 
 type Product = {
   id: number;
@@ -34,7 +35,7 @@ export default function VendingMachine() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:8000/api/products");
+      const res = await fetch(`${apiUrl}/api/products`);
       if (!res.ok) throw new Error("โหลดข้อมูลสินค้าไม่สำเร็จ");
       const data = await res.json();
       setProducts(data);
@@ -47,7 +48,7 @@ export default function VendingMachine() {
 
   const updateProductStock = async (productId: number, newStock: number) => {
     try {
-      await fetch(`http://localhost:8000/api/products/${productId}`, {
+      await fetch(`${apiUrl}/api/products/${productId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ stock: newStock }),
