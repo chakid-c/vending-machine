@@ -18,6 +18,9 @@ WORKDIR /var/www/
 
 COPY . .
 
+# คัดลอก .env.example ไปเป็น .env
+RUN cp .env.example .env
+
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # คัดลอก entrypoint.sh และตั้งสิทธิ์ให้สามารถรันได้

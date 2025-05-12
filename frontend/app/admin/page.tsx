@@ -14,8 +14,8 @@ export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [form, setForm] = useState<Omit<Product, "id">>({
     name: "",
-    price: 0,
-    stock: 0,
+    price: "", 
+    stock: "", 
     image: "",
   });
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -68,21 +68,21 @@ export default function ProductPage() {
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Product Management</h1>
 
-      <div className="bg-white p-4 rounded shadow mb-6">
+      <div className="bg-black p-4 rounded shadow mb-6">
         <h2 className="text-lg font-semibold mb-2">
-          {editingId ? "Edit Product" : "Add Product"}
+          {editingId ? "แก้ไขสินค้า" : "เพิ่มสินค้า"}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="text"
-            placeholder="Name"
+            placeholder="ชื่อสินค้า"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             className="border px-3 py-2 rounded"
           />
           <input
             type="number"
-            placeholder="Price"
+            placeholder="ราคาสินค้า"
             value={form.price}
             onChange={(e) =>
               setForm({ ...form, price: Number(e.target.value) })
@@ -91,7 +91,7 @@ export default function ProductPage() {
           />
           <input
             type="number"
-            placeholder="Stock"
+            placeholder="จำนวนสินค้า"
             value={form.stock}
             onChange={(e) =>
               setForm({ ...form, stock: Number(e.target.value) })
@@ -100,7 +100,7 @@ export default function ProductPage() {
           />
           <input
             type="text"
-            placeholder="Image URL"
+            placeholder="ลิ้งค์รูปภาพ"
             value={form.image}
             onChange={(e) => setForm({ ...form, image: e.target.value })}
             className="border px-3 py-2 rounded"
@@ -110,7 +110,7 @@ export default function ProductPage() {
           onClick={handleSubmit}
           className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          {editingId ? "Update" : "Add"}
+          {editingId ? "อัปเดต" : "เพิ่ม"}
         </button>
       </div>
 
@@ -123,7 +123,7 @@ export default function ProductPage() {
             <div>
               <p className="font-semibold">{product.name}</p>
               <p>
-                ฿{product.price} | Stock: {product.stock}
+                ฿{product.price} | จำนวน: {product.stock}
               </p>
               <img
                 src={product.image}
@@ -136,13 +136,13 @@ export default function ProductPage() {
                 onClick={() => handleEdit(product)}
                 className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
               >
-                Edit
+                แก้ไข
               </button>
               <button
                 onClick={() => handleDelete(product.id)}
                 className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
               >
-                Delete
+                ลบ
               </button>
             </div>
           </div>
