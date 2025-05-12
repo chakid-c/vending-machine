@@ -5,4 +5,6 @@ until php artisan migrate --force; do
   sleep 10
 done
 
+php artisan db:seed
+
 php artisan serve --host=0.0.0.0 --port=8000
