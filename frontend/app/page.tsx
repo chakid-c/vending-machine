@@ -31,7 +31,7 @@ export default function VendingMachine() {
   const [coinStock, setCoinStock] = useState(initialCoinStock);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  // เรียกดูข้อมูลสินค้า
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -45,7 +45,7 @@ export default function VendingMachine() {
       setLoading(false);
     }
   };
-
+  // อัปเดต stock
   const updateProductStock = async (productId: number, newStock: number) => {
     try {
       await fetch(`${apiUrl}/api/products/${productId}`, {
@@ -57,18 +57,18 @@ export default function VendingMachine() {
       console.error("❌ อัปเดต stock ล้มเหลว", err);
     }
   };
-
+  // เพิ่มเงิน
   const handleInsert = (amount: number) => {
     setInsertedAmount((prev) => prev + amount);
     setMessage("");
   };
-
+  // ทอนเงิน
   const hasSufficientChange = (change: number): boolean => {
     let remainingChange = change;
     const coinTypes = Object.keys(coinStock)
       .map(Number)
       .sort((a, b) => b - a);
-
+    // ทอนเงิน 
     for (let coin of coinTypes) {
       const coinCount = coinStock[coin];
       if (coinCount > 0 && remainingChange >= coin) {
@@ -80,7 +80,7 @@ export default function VendingMachine() {
 
     return remainingChange === 0;
   };
-
+  // ซื้อสินค้า
   const handleSelect = async (productId: number) => {
     const product = products.find((p) => p.id === productId);
     if (!product) return;
