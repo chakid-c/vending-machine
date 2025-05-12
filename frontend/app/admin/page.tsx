@@ -19,6 +19,8 @@ export default function ProductPage() {
     image: "",
   });
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [message, setMessage] = useState<string>("");
+
 
   useEffect(() => {
     fetchProducts();
@@ -42,6 +44,9 @@ export default function ProductPage() {
       body: JSON.stringify(form),
     });
 
+    setMessage(editingId ? "แก้ไขสินค้าสำเร็จ" : "เพิ่มสินค้าสำเร็จ");
+    setTimeout(() => setMessage(""), 3000);
+
     setForm({ name: "", price: 0, stock: 0, image: "" });
     setEditingId(null);
     fetchProducts();
@@ -51,6 +56,8 @@ export default function ProductPage() {
     await fetch(`${apiUrl}/api/products/${id}`, {
       method: "DELETE",
     });
+    setMessage("ลบสินค้าสำเร็จ");
+    setTimeout(() => setMessage(""), 3000);
     fetchProducts();
   };
 
@@ -148,6 +155,19 @@ export default function ProductPage() {
           </div>
         ))}
       </div>
+      {message && (
+    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg transition-all duration-300">
+      <div className="flex justify-between items-center">
+        <span>{message}</span>
+        <button
+          onClick={() => setMessage("")}
+          className="ml-4 text-white font-bold text-xl leading-none"
+        >
+          ×
+        </button>
+      </div>
+  </div>
+)}
     </div>
   );
 }
