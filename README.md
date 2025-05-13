@@ -26,7 +26,7 @@ docker compose up --build
 docker exec vending-machine-frontend-1 npm run test
 
 ### โปรดรอ
-หลังจากที่รัน Docker และติดตั้งระบบเรียบร้อยแล้ว ผู้ใช้สามารถตรวจสอบว่าแอปพลิเคชันพร้อมใช้งานได้ด้วยวิธีดังนี้:
+หลังจากที่รัน Docker และติดตั้งระบบเรียบร้อยแล้ว ผู้ใช้สามารถตรวจสอบว่าแอปพลิเคชันพร้อมใช้งาน
 
 Frontend (Next.js): http://localhost:3000
 Frontend-Admin (Next): http://localhost:3000/admin
